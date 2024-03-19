@@ -1,33 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @tailwind base;
+
+@layer base {
+    .no-tw-base {
+        h1,h2,h3,h4,h5,h6{
+            font-size: revert;
+            font-weight: revert;
+            color: white;
+        }
+
+        p, span {
+            color: #a1a1a1;
+            font-weight: 400;
+        }
+
+        a {
+            font-size: revert;
+            color: skyblue;
+            text-decoration: revert;
+        }
+
+        table {
+            border-collapse: revert;
+            border: revert;
+            padding: revert;
+            margin: revert;
+        }
+
+        th,tbody,td,tr {
+            padding: revert;
+            font-size: revert;
+            margin: revert;
+            font-weight: revert;
+            border: revert;
+            border-color: revert;
+        }
+
+        pre {
+            border-radius: 10px!important;
+            margin: 1rem 0!important;
+            padding: 30px!important;
+            background-color: #1b1b1b !important
+        }
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body::-webkit-scrollbar {
+  width: 8px;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: none;
 }
