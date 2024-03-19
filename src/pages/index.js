@@ -16,7 +16,8 @@ export default function Home({ blogs }) {
 }
 
 export async function getStaticProps() {
-    const response = await fetch("http://localhost:8000/api/blogs/published");
+    console.log(process.env.SERVER_URL);
+    const response = await fetch(`${process.env.SERVER_URL}/published`);
     const result = await response.json();
     return {
         props: {
