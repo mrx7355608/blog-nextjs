@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import TagsList from "./Tagslist";
+import TagsList from "../tags/Tagslist";
 import { FaArrowRight } from "react-icons/fa";
 
-export default function BlogCard({ blog }) {
+export default function BlogItem({ blog }) {
     return (
         <div className="flex flex-col p-3 my-4 w-full">
             {/* Title */}
