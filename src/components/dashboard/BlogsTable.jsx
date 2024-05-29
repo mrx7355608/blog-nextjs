@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BlogsTable({ blogs }) {
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mb-4">
             <table className="table">
                 <tbody>
                     <tr>
