@@ -21,7 +21,7 @@ export default function Searchbar() {
     }, 400);
 
     return (
-        <form className="w-full relative">
+        <form className="relative">
             <input
                 type="text"
                 className="input h-10 text-sm font-medium w-full bg-zinc-900 rounded-full w-64 px-4 pr-8"
@@ -30,7 +30,7 @@ export default function Searchbar() {
             />
             <button
                 type="submit"
-                className="btn btn-sm btn-ghost absolute top-3.5 right-3 text-gray-500"
+                className="btn btn-sm btn-ghost absolute top-1 right-1 text-gray-500"
             >
                 <FaSearch size={12} color="gray" />
             </button>
