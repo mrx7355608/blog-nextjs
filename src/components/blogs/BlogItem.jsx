@@ -15,7 +15,7 @@ export default function BlogItem({ blog }) {
 
             {/* Publishing date */}
             <i className="text-gray-500 font-medium mt-2">
-                {blog.published_on}
+                {new Date(blog.published_on).toDateString().slice(4)}
             </i>
 
             {/* Tags */}
