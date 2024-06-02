@@ -1,4 +1,3 @@
-import React from "react";
 import BlogsList from "@/components/blogs/BlogsList";
 import { getBlogs } from "@/lib/data";
 
