@@ -35,6 +35,16 @@ export async function createPublishedBlog(tags, formData) {
     redirect("/dashboard");
 }
 
+export async function deleteBlog(id) {
+    connectDB().then(async () => {
+        await BlogModel.findByIdAndDelete(id);
+    });
+    revalidatePath("/dashboard");
+}
+
+/**
+ * Utility functions
+ */
 function createBlogObject(rawData, tags) {
     const blog = Object.assign(rawData, { tags });
     if (blog.is_published === "yes") {

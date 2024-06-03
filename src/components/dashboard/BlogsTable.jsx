@@ -1,4 +1,4 @@
-import React from "react";
+import DeleteBlogButton from "./DeleteBlogButton";
 
 export default function BlogsTable({ blogs }) {
     return (
@@ -32,9 +32,7 @@ export default function BlogsTable({ blogs }) {
                                     <button className="btn btn-warning btn-sm mx-3">
                                         Edit
                                     </button>
-                                    <button className="btn btn-error btn-sm">
-                                        Delete
-                                    </button>
+                                    <DeleteBlogButton blogID={blog._id} />
                                 </td>
                             </tr>
                         </tbody>

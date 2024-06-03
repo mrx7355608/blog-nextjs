@@ -1,5 +1,6 @@
 "use client";
 import { useFormStatus } from "react-dom";
+import Spinner from "../Spinner";
 
 export default function SubmitButton() {
     const { pending } = useFormStatus();
@@ -13,8 +14,4 @@ export default function SubmitButton() {
             {pending ? <Spinner /> : "Create"}
         </button>
     );
-}
-
-function Spinner() {
-    return <span className="loading loading-dots loading-sm"></span>;
 }
