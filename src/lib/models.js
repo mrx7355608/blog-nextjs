@@ -3,16 +3,15 @@ import mongoose from "mongoose";
 const blogSchema = new mongoose.Schema(
     {
         title: { type: String, required: true },
-        content: { type: String, required: true },
-        published_on: { type: String, required: true },
-        is_published: { type: Boolean, required: true },
+        content: { type: String },
+        is_published: { type: Boolean },
         tags: { type: [String], default: [] },
         slug: { type: String, required: true },
-        summary: { type: String, required: true },
+        summary: { type: String },
     },
     {
         timestamps: true,
-    }
+    },
 );
 
 const userSchema = new mongoose.Schema(
@@ -23,7 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
-    }
+    },
 );
 
 const UserModel = mongoose.models?.User || mongoose.model("User", userSchema);

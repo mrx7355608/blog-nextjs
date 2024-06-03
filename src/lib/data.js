@@ -1,3 +1,8 @@
+"use server";
+import slugify from "slugify";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
 import { connectDB } from "./db";
 import { BlogModel } from "./models";
 
@@ -11,4 +16,32 @@ export async function getBlogs(title) {
         console.log(err);
         throw new Error("Unable to fetch blogs");
     }
+}
+
+export async function createPublishedBlog(tags, formData) {
+    // Create blog object from formdata
+    const rawData = Object.fromEntries(formData);
+    const blog = createBlogObject(rawData, tags);
+
+    // TODO: validate blog data
+
+    // Save blog in database
+    connectDB().then(async () => {
+        await BlogModel.create(blog);
+    });
+
+    // Redirect to dashboard page
+    revalidatePath("/dashboard");
+    redirect("/dashboard");
+}
+
+function createBlogObject(rawData, tags) {
+    const blog = Object.assign(rawData, { tags });
+    if (blog.is_published === "yes") {
+        blog.is_published = true;
+    } else {
+        blog.is_published = false;
+    }
+    blog.slug = slugify(blog.title, { lower: true });
+    return blog;
 }
