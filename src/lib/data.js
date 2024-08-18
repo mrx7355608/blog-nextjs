@@ -18,6 +18,12 @@ export async function getBlogs(title) {
     }
 }
 
+export async function getOneBlogBySlug(slug) {
+    await connectDB();
+    const blog = await BlogModel.findOne({ slug }).lean();
+    return blog;
+}
+
 export async function createPublishedBlog(tags, formData) {
     // Create blog object from formdata
     const rawData = Object.fromEntries(formData);

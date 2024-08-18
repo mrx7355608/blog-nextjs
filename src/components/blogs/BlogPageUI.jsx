@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import TagItem from "../tags/TagItem";
+import parse from "html-react-parser";
 
 export default function BlogPageUI({ blog }) {
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
+    // useEffect(() => {
+    //     Prism.highlightAll();
+    // }, []);
 
     return (
         <div className="min-h-screen w-full pt-12">
