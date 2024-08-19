@@ -18,11 +18,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
+        <html lang="en" className="bg-white">
             <body>
                 <Navbar />
                 <main
-                    className={`bg-black min-h-screen flex items-start justify-center py-12 px-12 w-full ${roboto.className}`}
+                    className={`min-h-screen flex items-start justify-center py-12 px-12 w-full ${roboto.className}`}
                 >
                     {children}
                 </main>

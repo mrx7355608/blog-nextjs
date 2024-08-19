@@ -7,12 +7,12 @@ import Image from "next/image";
 
 export default function Navbar() {
     return (
-        <header className="flex justify-between lg:justify-around items-center p-6 px-12 shadow bg-black w-full">
+        <header className="flex justify-between lg:justify-around items-center p-3 shadow px-12 bg-gray-0 w-full">
             <Link href="/">
                 <Image src={"/logo.png"} alt="logo" width={55} height={55} />
             </Link>
             <MobMenu />
-            <div className="hidden lg:flex items-center gap-6 text-white mr-4">
+            <div className="hidden lg:flex items-center gap-6 text-gray-800 mr-4">
                 <Link href="https://www.facebook.com/fdas23/" target="_blank">
                     <FaFacebook size={20} />
                 </Link>

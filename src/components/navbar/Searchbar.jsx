@@ -24,7 +24,7 @@ export default function Searchbar() {
         <form className="relative">
             <input
                 type="text"
-                className="input h-10 text-sm font-medium w-full bg-zinc-900 rounded-full w-64 px-4 pr-8"
+                className="input h-10 bg-gray-100 text-sm font-medium rounded-full w-64 px-4 pr-8"
                 placeholder="Search"
                 onChange={handleSearch}
             />
@@ -32,7 +32,7 @@ export default function Searchbar() {
                 type="submit"
                 className="btn btn-sm btn-ghost absolute top-1 right-1 text-gray-500"
             >
-                <FaSearch size={12} color="gray" />
+                <FaSearch size={12} />
             </button>
         </form>
     );

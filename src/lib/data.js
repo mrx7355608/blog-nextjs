@@ -9,8 +9,20 @@ import { BlogModel } from "./models";
 export async function getBlogs(title) {
     try {
         await connectDB();
-        const regex = new RegExp(title, "i");
-        const blogs = await BlogModel.find({ title: { $regex: regex } });
+
+        let blogs;
+
+        if (title) {
+            const regex = new RegExp(title, "i");
+            blogs = await BlogModel.find({
+                title: { $regex: regex },
+                is_published: true,
+            });
+        } else {
+            blogs = await BlogModel.find({
+                is_published: true,
+            });
+        }
         return JSON.parse(JSON.stringify(blogs));
     } catch (err) {
         console.log(err);
@@ -20,8 +32,8 @@ export async function getBlogs(title) {
 
 export async function getOneBlogBySlug(slug) {
     await connectDB();
-    const blog = await BlogModel.findOne({ slug }).lean();
-    return blog;
+    const blog = await BlogModel.findOne({ slug });
+    return JSON.parse(JSON.stringify(blog));
 }
 
 export async function createPublishedBlog(tags, formData) {
