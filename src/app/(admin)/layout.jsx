@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
         <html lang="en">
             <body>
                 <main
-                    className={`bg-black min-h-screen flex items-center justify-center p-12 w-full ${inter.className}`}
+                    className={`bg-gray-100 min-h-screen flex items-center justify-center p-12 w-full ${inter.className}`}
                 >
                     {children}
                 </main>
