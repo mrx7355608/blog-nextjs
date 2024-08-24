@@ -1,14 +1,10 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { loginUser } from "@/app/actions";
-
-const initialState = {
-    message: "",
-};
+import { authenticate } from "@/app/actions";
 
 export default function Login() {
-    const [state, formAction] = useFormState(loginUser, initialState);
+    const [errorMessage, formAction] = useFormState(authenticate, undefined);
 
     return (
         <div className="flex min-h-screen items-center justify-center p-1 w-full">
@@ -21,9 +17,9 @@ export default function Login() {
                         Login
                     </h2>
 
-                    {state?.message && (
+                    {errorMessage && (
                         <p className="bg-red-100 text-red-700 font-medium w-full p-2 px-4 mb-4 rounded-sm">
-                            {state.message}
+                            {errorMessage}
                         </p>
                     )}
                     <div className="mb-4">

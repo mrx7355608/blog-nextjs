@@ -1,32 +1,20 @@
 "use server";
 
-import { connectDB } from "@/lib/db";
-import { UserModel } from "@/lib/models";
-import bcrypt from "bcryptjs";
-import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
-export async function loginUser(prevState, formData) {
-    await connectDB();
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    if (!email) {
-        return { message: "Email is required!" };
+export async function authenticate(prevState, formData) {
+    try {
+        await signIn("credentials", formData);
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case "CredentialsSignin":
+                    return "Invalid credentials.";
+                default:
+                    return "Something went wrong.";
+            }
+        }
+        throw error;
     }
-    if (!password) {
-        return { message: "Password is required!" };
-    }
-
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-        return { message: "Incorrect email or password" };
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-        return { message: "Incorrect email or password" };
-    }
-
-    console.log("redirecting...");
-    redirect("/dashboard");
 }
