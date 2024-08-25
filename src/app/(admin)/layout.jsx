@@ -1,3 +1,4 @@
+import AdminNavbar from "@/components/navbar/AdminNavbar";
 import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 
@@ -13,6 +14,7 @@ export default function DashboardLayout({ children }) {
     return (
         <html lang="en">
             <body>
+                <AdminNavbar />
                 <main
                     className={`bg-gray-100 min-h-screen flex items-center justify-center p-12 w-full ${inter.className}`}
                 >
