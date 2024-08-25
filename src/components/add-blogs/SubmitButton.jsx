@@ -7,7 +7,7 @@ export default function SubmitButton() {
 
     return (
         <button
-            className="btn btn-success rounded-full mt-9"
+            className="btn btn-neutral text-white rounded-full mt-9"
             type="submit"
             disabled={pending}
         >

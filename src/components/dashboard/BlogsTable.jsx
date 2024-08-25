@@ -2,6 +2,7 @@ import DeleteBlogButton from "./DeleteBlogButton";
 import { deleteBlog, publish, unpublish } from "@/lib/data";
 import UnPublishButton from "./UnPublishButton";
 import PublishButton from "./PublishButton";
+import Link from "next/link";
 
 export default function BlogsTable({ blogs }) {
     return (
@@ -29,33 +30,20 @@ export default function BlogsTable({ blogs }) {
                                     {blog.is_published ? "Published" : "Draft"}
                                 </td>
                                 <td className="flex items-center gap-2">
-                                    <button className="btn btn-info btn-sm">
-                                        View
-                                    </button>
+                                    <Link href={`/blog/${blog.slug}`}>
+                                        <button className="btn btn-info btn-sm">
+                                            View
+                                        </button>
+                                    </Link>
                                     <button className="btn btn-warning btn-sm">
                                         Edit
                                     </button>
-
-                                    <form
-                                        action={async () => {
-                                            "use server";
-                                            await deleteBlog(blog._id);
-                                        }}
-                                    >
-                                        <DeleteBlogButton />
-                                    </form>
+                                    <DeleteBlogButton blogId={blog._id} />
 
                                     {blog.is_published ? (
                                         <UnPublishButton blogId={blog._id} />
                                     ) : (
-                                        <form
-                                            action={async () => {
-                                                "use server";
-                                                await publish(blog._id);
-                                            }}
-                                        >
-                                            <PublishButton />
-                                        </form>
+                                        <PublishButton blogId={blog._id} />
                                     )}
                                 </td>
                             </tr>
