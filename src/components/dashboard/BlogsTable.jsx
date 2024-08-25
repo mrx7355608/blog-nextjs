@@ -1,5 +1,5 @@
 import DeleteBlogButton from "./DeleteBlogButton";
-import { publish, unpublish } from "@/lib/data";
+import { deleteBlog, publish, unpublish } from "@/lib/data";
 import UnPublishButton from "./UnPublishButton";
 import PublishButton from "./PublishButton";
 
@@ -28,24 +28,25 @@ export default function BlogsTable({ blogs }) {
                                 <td>
                                     {blog.is_published ? "Published" : "Draft"}
                                 </td>
-                                <td>
+                                <td className="flex items-center gap-2">
                                     <button className="btn btn-info btn-sm">
                                         View
                                     </button>
-                                    <button className="btn btn-warning btn-sm mx-3">
+                                    <button className="btn btn-warning btn-sm">
                                         Edit
                                     </button>
-                                    <DeleteBlogButton blogID={blog._id} />
+
+                                    <form
+                                        action={async () => {
+                                            "use server";
+                                            await deleteBlog(blog._id);
+                                        }}
+                                    >
+                                        <DeleteBlogButton />
+                                    </form>
 
                                     {blog.is_published ? (
-                                        <form
-                                            action={async () => {
-                                                "use server";
-                                                await unpublish(blog._id);
-                                            }}
-                                        >
-                                            <UnPublishButton />
-                                        </form>
+                                        <UnPublishButton blogId={blog._id} />
                                     ) : (
                                         <form
                                             action={async () => {

@@ -1,16 +1,11 @@
 "use client";
-import { deleteBlog } from "@/lib/data";
 import { useFormStatus } from "react-dom";
 import Spinner from "../Spinner";
 
-export default function DeleteBlogButton({ blogID }) {
+export default function DeleteBlogButton() {
     const { pending } = useFormStatus();
     return (
-        <button
-            className="btn btn-error btn-sm"
-            onClick={async () => await deleteBlog(blogID)}
-            disabled={pending}
-        >
+        <button className="btn btn-error btn-sm" disabled={pending}>
             {pending ? <Spinner /> : "Delete"}
         </button>
     );

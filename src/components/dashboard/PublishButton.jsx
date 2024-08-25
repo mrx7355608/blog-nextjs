@@ -7,7 +7,7 @@ export default function PublishButton() {
     const { pending } = useFormStatus();
 
     return (
-        <button className="btn btn-primary btn-sm mx-3">
+        <button className="btn btn-primary btn-sm">
             {pending ? <Spinner /> : "Publish"}
         </button>
     );
