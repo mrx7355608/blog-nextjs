@@ -1,21 +1,24 @@
 "use client";
 
-import { createPublishedBlog } from "../../lib/data";
 import { useRef, useState } from "react";
-import SubmitButton from "./SubmitButton";
 import TinyMceEditor from "./TinyMceEditor";
+import Spinner from "../Spinner";
 
 export default function AddBlogForm() {
     const [tags, setTags] = useState([]);
     const [inputTag, setInputTag] = useState("");
-    const publishBlog = createPublishedBlog.bind(null, tags);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
     const editorRef = useRef();
 
+    async function createBlog() {
+        // 1. Validate data
+        // 2. Make API request
+        // 3. Redirect to dashboard
+    }
+
     return (
-        <form
-            className="w-3/4 mx-auto flex flex-col gap-4"
-            action={publishBlog}
-        >
+        <div className="w-3/4 mx-auto flex flex-col gap-4">
             {/* Title */}
             <input
                 type="text"
@@ -94,9 +97,21 @@ export default function AddBlogForm() {
                 </div>
             </div>
 
+            {/* Error Message */}
+            {error && (
+                <p className="px-6 py-2 bg-red-100 text-red-700 font-medium">
+                    {error}
+                </p>
+            )}
             {/* Button */}
-            <SubmitButton />
-        </form>
+            <button
+                className="btn btn-neutral text-white rounded-full mt-9"
+                type="submit"
+                disabled={isLoading}
+            >
+                {isLoading ? <Spinner /> : "Create"}
+            </button>
+        </div>
     );
 
     function removeTag(tag) {
