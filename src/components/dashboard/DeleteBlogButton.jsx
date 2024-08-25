@@ -1,6 +1,7 @@
 "use client";
 import { useFormStatus } from "react-dom";
 import Spinner from "../Spinner";
+import { deleteBlog } from "@/lib/data";
 
 export default function DeleteBlogButton({ blogId }) {
     return (

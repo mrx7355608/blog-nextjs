@@ -42,9 +42,10 @@ export default function AddBlogForm() {
                 const result = await response.json();
                 setError(result.error);
                 setTimeout(() => setError(""), 5000);
+            } else {
+                location.pathname = "/dashboard";
             }
         } catch (err) {
-            console.log(err.message);
             setError("Something went wrong!");
         } finally {
             setIsLoading(false);
