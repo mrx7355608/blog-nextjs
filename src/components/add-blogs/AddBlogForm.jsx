@@ -1,41 +1,39 @@
 "use client";
+
 import { createPublishedBlog } from "../../lib/data";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SubmitButton from "./SubmitButton";
+import TinyMceEditor from "./TinyMceEditor";
 
 export default function AddBlogForm() {
     const [tags, setTags] = useState([]);
     const [inputTag, setInputTag] = useState("");
     const publishBlog = createPublishedBlog.bind(null, tags);
+    const editorRef = useRef();
 
     return (
         <form
-            className="w-1/2 mx-auto flex flex-col gap-4"
+            className="w-3/4 mx-auto flex flex-col gap-4"
             action={publishBlog}
         >
             {/* Title */}
             <input
                 type="text"
                 name="title"
-                className="input"
+                className="input bg-gray-100 text-xl"
                 placeholder="Title"
             />
 
             {/* Summary */}
             <textarea
                 name="summary"
-                rows={3}
-                className="textarea resize-none"
+                rows={4}
+                className="textarea resize-none bg-gray-100 text-md"
                 placeholder="Summary"
             ></textarea>
 
             {/* Content */}
-            <textarea
-                name="content"
-                rows={10}
-                className="textarea resize-none"
-                placeholder="Content"
-            ></textarea>
+            <TinyMceEditor ref={editorRef} />
 
             {/* Tags */}
             <div className="w-full">
@@ -43,13 +41,13 @@ export default function AddBlogForm() {
                     {tags.map((item, index) => {
                         return (
                             <div
-                                className="px-4 py-2 rounded-lg bg-zinc-900"
+                                className="px-4 py-2 rounded-lg bg-gray-100"
                                 key={index}
                             >
                                 <span>{item}</span>
                                 <span
                                     onClick={() => removeTag(item)}
-                                    className="btn btn-xs btn-error rounded-full p-1 px-2 pb-1.5 ml-2 hover:text-gray-100"
+                                    className="btn btn-xs btn-error rounded-full p-1 px-2 pb-1.5 ml-2"
                                 >
                                     x
                                 </span>
@@ -58,7 +56,7 @@ export default function AddBlogForm() {
                     })}
                     <div className="flex gap-3 w-full">
                         <input
-                            className="input w-full"
+                            className="input w-full bg-gray-100"
                             placeholder="Tag"
                             onChange={onChangeHandler}
                             value={inputTag}
@@ -105,8 +103,10 @@ export default function AddBlogForm() {
         setTags(tags.filter((t) => t !== tag));
     }
     function addTag() {
-        setTags([inputTag, ...tags]);
-        setInputTag("");
+        if (inputTag.trim()) {
+            setTags([inputTag, ...tags]);
+            setInputTag("");
+        }
     }
     function onChangeHandler(e) {
         setInputTag(e.target.value);
