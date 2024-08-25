@@ -1,19 +1,22 @@
 "use client";
-// import "prismjs/themes/prism-tomorrow.css";
-// import "prismjs/components/prism-java";
-// import "prismjs/components/prism-python";
-// import "prismjs/components/prism-c";
-// import "prismjs/components/prism-cpp";
+
 import { getOneBlogBySlug } from "@/lib/data";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 
+import Prism from "prismjs";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-javascript";
+import "prismjs/themes/prism.css";
+
 export default function SingleBlog() {
     const { slug } = useParams();
     const [blog, setBlog] = useState();
     const [loading, setLoading] = useState(true);
-    // const [blog, setBlog] = useState();
 
     useEffect(() => {
         const getSingleBlog = async () => {
@@ -22,8 +25,8 @@ export default function SingleBlog() {
             setLoading(false);
         };
 
-        getSingleBlog();
-    }, [slug]);
+        getSingleBlog().then(() => Prism.highlightAll());
+    }, []);
 
     return (
         <>
@@ -35,8 +38,8 @@ export default function SingleBlog() {
                         <h1 className="text-4xl font-bold mb-1 text-gray-900 mt-3">
                             {blog.title}
                         </h1>
-                        <p className="text-gray-400 text-lg my-2">
-                            {new Date(blog.createdAt).toDateString()}
+                        <p className="text-gray-500 text-lg mt-2 mb-3">
+                            {new Date(blog.createdAt).toLocaleDateString()}
                         </p>
                         <div className="flex flex-wrap gap-2 mb-10 justify-center">
                             {blog.tags.map((tag, index) => (
