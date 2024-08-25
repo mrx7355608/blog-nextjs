@@ -1,19 +1,19 @@
 import BlogsTable from "@/components/dashboard/BlogsTable";
 import Searchbar from "@/components/navbar/Searchbar";
-import { getBlogs } from "@/lib/data";
+import { getBlogsForAdmin } from "@/lib/data";
 import Link from "next/link";
 
 export default async function Dashboard({ searchParams }) {
     const q = searchParams?.q || "";
-    const blogs = await getBlogs(q);
+    const blogs = await getBlogsForAdmin(q);
 
     return (
-        <div className="bg-zinc-950 text-white p-5 px-7 rounded-lg w-full">
+        <div className="bg-white text-gray-800 p-5 px-7 rounded-lg w-full shadow">
             <div className="flex justify-between items-center w-full mb-8">
                 <h1 className="text-2xl font-bold">Blogs</h1>
                 <div className="flex gap-3 items-center">
                     <Link href="/dashboard/add-blog">
-                        <button className="btn btn-primary btn-sm inline">
+                        <button className="btn btn-neutral rounded-full text-white px-5 btn-sm inline">
                             Add blog
                         </button>
                     </Link>

@@ -1,4 +1,7 @@
 import DeleteBlogButton from "./DeleteBlogButton";
+import { publish, unpublish } from "@/lib/data";
+import UnPublishButton from "./UnPublishButton";
+import PublishButton from "./PublishButton";
 
 export default function BlogsTable({ blogs }) {
     return (
@@ -33,6 +36,26 @@ export default function BlogsTable({ blogs }) {
                                         Edit
                                     </button>
                                     <DeleteBlogButton blogID={blog._id} />
+
+                                    {blog.is_published ? (
+                                        <form
+                                            action={async () => {
+                                                "use server";
+                                                await unpublish(blog._id);
+                                            }}
+                                        >
+                                            <UnPublishButton />
+                                        </form>
+                                    ) : (
+                                        <form
+                                            action={async () => {
+                                                "use server";
+                                                await publish(blog._id);
+                                            }}
+                                        >
+                                            <PublishButton />
+                                        </form>
+                                    )}
                                 </td>
                             </tr>
                         </tbody>

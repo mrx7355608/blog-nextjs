@@ -6,6 +6,26 @@ import { revalidatePath } from "next/cache";
 import { connectDB } from "./db";
 import { BlogModel } from "./models";
 
+export async function getBlogsForAdmin(title) {
+    try {
+        await connectDB();
+
+        let blogs;
+
+        if (title) {
+            const regex = new RegExp(title, "i");
+            blogs = await BlogModel.find({
+                title: { $regex: regex },
+            });
+        } else {
+            blogs = await BlogModel.find({});
+        }
+        return JSON.parse(JSON.stringify(blogs));
+    } catch (err) {
+        throw new Error("Unable to fetch blogs");
+    }
+}
+
 export async function getBlogs(title) {
     try {
         await connectDB();
@@ -25,7 +45,6 @@ export async function getBlogs(title) {
         }
         return JSON.parse(JSON.stringify(blogs));
     } catch (err) {
-        console.log(err);
         throw new Error("Unable to fetch blogs");
     }
 }
@@ -57,6 +76,30 @@ export async function deleteBlog(id) {
     connectDB().then(async () => {
         await BlogModel.findByIdAndDelete(id);
     });
+    revalidatePath("/dashboard");
+}
+
+export async function unpublish(id) {
+    connectDB().then(async () => {
+        await BlogModel.findByIdAndUpdate(
+            id,
+            { is_published: false },
+            { new: true },
+        );
+    });
+    revalidatePath("/");
+    revalidatePath("/dashboard");
+}
+
+export async function publish(id) {
+    connectDB().then(async () => {
+        await BlogModel.findByIdAndUpdate(
+            id,
+            { is_published: true },
+            { new: true },
+        );
+    });
+    revalidatePath("/");
     revalidatePath("/dashboard");
 }
 

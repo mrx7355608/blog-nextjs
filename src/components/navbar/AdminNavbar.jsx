@@ -19,7 +19,6 @@ export default function AdminNavbar() {
                     action={async () => {
                         "use server";
                         await signOut({
-                            callbackURL: "/login",
                             redirect: true,
                         });
                     }}
