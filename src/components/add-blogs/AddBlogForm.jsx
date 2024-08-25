@@ -7,14 +7,48 @@ import Spinner from "../Spinner";
 export default function AddBlogForm() {
     const [tags, setTags] = useState([]);
     const [inputTag, setInputTag] = useState("");
+    const [is_published, setIsPublished] = useState(false);
+    const [data, setData] = useState({
+        title: "",
+        summary: "",
+    });
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const editorRef = useRef();
 
     async function createBlog() {
-        // 1. Validate data
-        // 2. Make API request
-        // 3. Redirect to dashboard
+        try {
+            setIsLoading(true);
+            const blogObject = Object.assign(
+                data,
+                { is_published },
+                { tags },
+                { content: editorRef.current.getContent() },
+            );
+
+            // 1. Make API request
+            const response = await fetch("/api/blogs", {
+                credentials: "include",
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(blogObject),
+            });
+
+            // 2. Check Error / Redirect to dashboard
+            if (!response.ok) {
+                const result = await response.json();
+                setError(result.error);
+                setTimeout(() => setError(""), 5000);
+            }
+        } catch (err) {
+            console.log(err.message);
+            setError("Something went wrong!");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -25,6 +59,7 @@ export default function AddBlogForm() {
                 name="title"
                 className="input bg-gray-100 text-xl"
                 placeholder="Title"
+                onChange={onChangeHandler}
             />
 
             {/* Summary */}
@@ -33,6 +68,7 @@ export default function AddBlogForm() {
                 rows={4}
                 className="textarea resize-none bg-gray-100 text-md"
                 placeholder="Summary"
+                onChange={onChangeHandler}
             ></textarea>
 
             {/* Content */}
@@ -61,7 +97,7 @@ export default function AddBlogForm() {
                         <input
                             className="input w-full bg-gray-100"
                             placeholder="Tag"
-                            onChange={onChangeHandler}
+                            onChange={(e) => setInputTag(e.target.value)}
                             value={inputTag}
                         />
                         <span className="btn" onClick={addTag}>
@@ -79,6 +115,7 @@ export default function AddBlogForm() {
                             name="is_published"
                             value="no"
                             className="radio checked:bg-red-500"
+                            onClick={() => setIsPublished(false)}
                             defaultChecked
                         />
                     </label>
@@ -91,7 +128,7 @@ export default function AddBlogForm() {
                             name="is_published"
                             value="yes"
                             className="radio checked:bg-blue-500"
-                            defaultChecked
+                            onClick={() => setIsPublished(true)}
                         />
                     </label>
                 </div>
@@ -108,6 +145,7 @@ export default function AddBlogForm() {
                 className="btn btn-neutral text-white rounded-full mt-9"
                 type="submit"
                 disabled={isLoading}
+                onClick={createBlog}
             >
                 {isLoading ? <Spinner /> : "Create"}
             </button>
@@ -124,6 +162,7 @@ export default function AddBlogForm() {
         }
     }
     function onChangeHandler(e) {
-        setInputTag(e.target.value);
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
     }
 }

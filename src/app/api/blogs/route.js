@@ -27,7 +27,7 @@ export async function POST(request) {
         await BlogModel.create(blogObject);
 
         // 4. Send response back to client
-        return sendResponse({ message: "Blog created successfully" }, 201);
+        return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
     } catch (err) {
         console.log(err.message);
         if (err instanceof Joi.ValidationError) {

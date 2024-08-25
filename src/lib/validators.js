@@ -36,7 +36,7 @@ const blogValidationSchema = Joi.object({
             "any.required":
                 "Tags are required and cannot be null or undefined.",
         }),
-    isPublished: Joi.boolean().required().messages({
+    is_published: Joi.boolean().required().messages({
         "boolean.base": "Publishing status must be a boolean.",
         "any.required":
             "Publishing status is required and cannot be null or undefined.",
