@@ -5,6 +5,10 @@ import { getBlogById } from "@/lib/data";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import TinyMceEditor from "@/components/add-blogs/TinyMceEditor";
+import TitleInput from "@/components/add-blogs/TitleInput";
+import SummaryInput from "@/components/add-blogs/SummaryInput";
+import TagsInput from "@/components/add-blogs/TagsInput";
+import PublishUnpublishInput from "@/components/add-blogs/PublishUnpublishInput";
 
 export default function EditBlog() {
     const { id } = useParams();
@@ -50,90 +54,32 @@ export default function EditBlog() {
             </h1>
             <div className="w-3/4 mx-auto flex flex-col gap-4">
                 {/* Title */}
-                <input
-                    type="text"
-                    name="title"
-                    value={blog.title}
-                    className="input bg-gray-100 text-xl"
-                    placeholder="Title"
-                    onChange={onChangeHandler}
+                <TitleInput
+                    onChangeHandler={onChangeHandler}
+                    title={blog.title}
                 />
 
                 {/* Summary */}
-                <textarea
-                    name="summary"
-                    rows={4}
-                    className="textarea resize-none bg-gray-100 text-md"
-                    placeholder="Summary"
-                    onChange={onChangeHandler}
-                    value={blog.summary}
-                ></textarea>
+                <SummaryInput
+                    onChangeHandler={onChangeHandler}
+                    summary={blog.summary}
+                />
 
                 {/* Content */}
                 <TinyMceEditor content={blog.content} ref={editorRef} />
 
-                {/* Tags */}
                 <div className="w-full">
-                    <div className="flex flex-wrap gap-4 mb-6 mt-5">
-                        {blog.tags.map((item, index) => {
-                            return (
-                                <div
-                                    className="px-4 py-2 rounded-lg bg-gray-100"
-                                    key={index}
-                                >
-                                    <span>{item}</span>
-                                    <span
-                                        onClick={() => removeTag(item)}
-                                        className="btn btn-xs btn-error rounded-full p-1 px-2 pb-1.5 ml-2"
-                                    >
-                                        x
-                                    </span>
-                                </div>
-                            );
-                        })}
-                        <div className="flex gap-3 w-full">
-                            <input
-                                className="input w-full bg-gray-100"
-                                placeholder="Tag"
-                                onChange={(e) => setInputTag(e.target.value)}
-                                value={inputTag}
-                            />
-                            <span className="btn" onClick={addTag}>
-                                Add tag
-                            </span>
-                        </div>
-                    </div>
+                    {/* Tags */}
+                    <TagsInput
+                        tags={blog.tags}
+                        inputTag={inputTag}
+                        setInputTag={setInputTag}
+                        addTag={addTag}
+                        removeTag={removeTag}
+                    />
 
                     {/* Blog status (Published / Draft) */}
-                    <div className="form-control mt-8">
-                        <label className="label cursor-pointer">
-                            <span className="label-text">Draft</span>
-                            <input
-                                type="radio"
-                                name="is_published"
-                                value="no"
-                                className="radio checked:bg-red-500"
-                                onClick={() =>
-                                    setBlog({ ...blog, is_published: false })
-                                }
-                                defaultChecked
-                            />
-                        </label>
-                    </div>
-                    <div className="form-control">
-                        <label className="label cursor-pointer">
-                            <span className="label-text">Published</span>
-                            <input
-                                type="radio"
-                                name="is_published"
-                                value="yes"
-                                className="radio checked:bg-blue-500"
-                                onClick={() =>
-                                    setBlog({ ...blog, is_published: true })
-                                }
-                            />
-                        </label>
-                    </div>
+                    <PublishUnpublishInput setBlog={setBlog} />
                 </div>
 
                 {/* Error Message */}
