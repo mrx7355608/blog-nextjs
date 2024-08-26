@@ -6,6 +6,7 @@ const TinyMceEditor = React.forwardRef(function TinyMceEditor(props, ref) {
         <Editor
             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
             onInit={(evt, editor) => (ref.current = editor)}
+            initialValue={props.content}
             init={{
                 plugins:
                     "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker",

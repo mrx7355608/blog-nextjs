@@ -35,9 +35,11 @@ export default function BlogsTable({ blogs }) {
                                             View
                                         </button>
                                     </Link>
-                                    <button className="btn btn-warning btn-sm">
-                                        Edit
-                                    </button>
+                                    <Link href={`/edit/${blog._id}`}>
+                                        <button className="btn btn-warning btn-sm">
+                                            Edit
+                                        </button>
+                                    </Link>
                                     <DeleteBlogButton blogId={blog._id} />
 
                                     {blog.is_published ? (

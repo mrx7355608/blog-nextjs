@@ -22,7 +22,8 @@
         "react-dom": "^18",
         "react-icons": "^5.0.1",
         "slugify": "^1.6.6",
-        "use-debounce": "^10.0.1"
+        "use-debounce": "^10.0.1",
+        "validator": "^13.12.0"
     },
     "devDependencies": {
         "autoprefixer": "^10.0.1",

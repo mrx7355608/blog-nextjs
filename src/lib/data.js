@@ -83,3 +83,9 @@ export async function publish(id) {
     revalidatePath("/");
     revalidatePath("/dashboard");
 }
+
+export async function getBlogById(id) {
+    await connectDB();
+    const blog = await BlogModel.findById(id);
+    return JSON.parse(JSON.stringify(blog));
+}
