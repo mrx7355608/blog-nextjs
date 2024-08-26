@@ -1,11 +1,12 @@
 import { getOneBlogBySlug } from "@/lib/data";
 import BlogContent from "@/components/blogs/BlogContent";
+import Link from "next/link";
 
 export default async function SingleBlog({ params }) {
     const blog = await getOneBlogBySlug(params.slug);
 
     return (
-        <div className="min-h-screen w-full pt-12 text-center">
+        <div className="min-h-screen w-full pt-3 text-center">
             <div className="w-full px-11 lg:px-0 lg:w-2/3 mx-auto">
                 <h1 className="text-4xl font-bold mb-1 text-gray-900 mt-3">
                     {blog.title}
