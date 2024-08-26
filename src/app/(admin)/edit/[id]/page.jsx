@@ -9,9 +9,13 @@ import TinyMceEditor from "@/components/add-blogs/TinyMceEditor";
 export default function EditBlog() {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
+
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
     const [editing, setEditing] = useState(false);
+
+    const [error, setError] = useState("");
+    const [editingError, setEditingError] = useState("");
+
     const [inputTag, setInputTag] = useState("");
     const editorRef = useRef();
 
@@ -133,9 +137,9 @@ export default function EditBlog() {
                 </div>
 
                 {/* Error Message */}
-                {error && (
+                {editingError && (
                     <p className="px-6 py-2 bg-red-100 text-red-700 font-medium">
-                        {error}
+                        {editingError}
                     </p>
                 )}
                 {/* Button */}
@@ -186,12 +190,18 @@ export default function EditBlog() {
             // 2. Show errors / Redirect to dashboard
             if (!response.ok) {
                 const result = await response.json();
-                setError(result.error);
+                setEditingError(result.error);
+                setTimeout(() => {
+                    setEditingError("");
+                }, 5000);
             } else {
                 location.pathname = "/dashboard";
             }
         } catch (err) {
-            setError("Something went wrong!");
+            setEditingError("Something went wrong!");
+            setTimeout(() => {
+                setEditingError("");
+            }, 5000);
         } finally {
             setEditing(false);
         }

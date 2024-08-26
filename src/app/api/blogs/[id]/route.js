@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import validator from "validator";
 import slugify from "slugify";
 import { connectDB } from "@/lib/db";
+import blogValidationSchema from "@/lib/validators";
 
 function sendResponse(message, statusCode) {
     return NextResponse.json(message, {
@@ -33,8 +34,8 @@ export async function PATCH(request, { params }) {
         if (!data) {
             return sendResponse({ error: "Updated data is missing" }, 400);
         }
-        // const { error } = blogValidationSchema.validate(data);
-        // if (error) throw error;
+        const { error } = blogValidationSchema.validate(data);
+        if (error) throw error;
 
         // 4. Update slug
         const blogObject = Object.assign(data, { slug: slugify(data.title) });
