@@ -13,20 +13,32 @@ function sendResponse(message, statusCode) {
 
 export async function POST(request) {
     try {
+        // 1. Authenticate request
+        const authCookie = cookies().get("authjs.session-token");
+        if (!authCookie) {
+            return sendResponse({ error: "Not authenticated" }, 401);
+        }
+
+        const authToken = authCookie.value;
+        if (!authToken) {
+            return sendResponse({ error: "Not authenticated" }, 401);
+        }
+
+        // 2. Extract data from request
         const data = await request.json();
 
-        // 1. Validate blog data
+        // 3. Validate blog data
         const { error } = blogValidationSchema.validate(data);
         if (error) throw error;
 
-        // 2. Create a blog object with slug
+        // 4. Create a blog object with slug
         const blogObject = Object.assign(data, { slug: slugify(data.title) });
 
-        // 3. Save blog in database
+        // 5. Save blog in database
         await connectDB();
         await BlogModel.create(blogObject);
 
-        // 4. Send response back to client
+        // 6. Send response back to client
         return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
     } catch (err) {
         console.log(err.message);

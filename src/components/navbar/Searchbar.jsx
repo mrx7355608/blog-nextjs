@@ -21,7 +21,7 @@ export default function Searchbar() {
     }, 400);
 
     return (
-        <form className="relative">
+        <form className="relative w-full">
             <input
                 type="text"
                 className="input bg-gray-700 text-gray-200 font-medium w-full px-4 pr-8"
