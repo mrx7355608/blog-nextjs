@@ -15,8 +15,13 @@ function sendResponse(message, statusCode) {
 
 export async function PATCH(request, { params }) {
     try {
+        const cookieName =
+            process.env.NODE_ENV === "production"
+                ? "__Secure-authjs.session-token"
+                : "authjs.session-token";
+
         // 1. Authenticate request
-        const authCookie = cookies().get("authjs.session-token");
+        const authCookie = cookies().get(cookieName);
         if (!authCookie) {
             return sendResponse({ error: "Not authenticated" }, 401);
         }
