@@ -30,7 +30,7 @@ export default function BlogsTable({ blogs }) {
                                     {blog.is_published ? "Published" : "Draft"}
                                 </td>
                                 <td className="flex items-center gap-2">
-                                    <Link href={`/blog/${blog.slug}`}>
+                                    <Link href={`/view-blog/${blog.slug}`}>
                                         <button className="btn btn-info btn-sm">
                                             View
                                         </button>

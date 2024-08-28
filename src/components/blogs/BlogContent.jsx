@@ -9,7 +9,7 @@ import "prismjs/components/prism-python";
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism.css";
+import "prismjs/themes/prism-tomorrow.css";
 
 export default function BlogContent({ content }) {
     useEffect(() => Prism.highlightAll(), []);

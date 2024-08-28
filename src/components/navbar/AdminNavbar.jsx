@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function AdminNavbar() {
     return (
-        <nav className="bg-white shadow p-4 px-8 flex items-center justify-between">
+        <nav className="bg-white border border-b-gray-200 p-4 px-8 flex items-center justify-between">
             <div className="font-bold text-lg text-gray-800">
                 <Link href="/dashboard" className="flex items-center space-x-2">
                     <span>Blog Admin Panel</span>

@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
             <body>
                 <AdminNavbar />
                 <main
-                    className={`bg-gray-100 min-h-screen p-12 w-full ${inter.className}`}
+                    className={`bg-white min-h-screen p-12 w-full ${inter.className}`}
                 >
                     {children}
                 </main>
