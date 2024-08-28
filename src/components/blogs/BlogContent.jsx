@@ -13,5 +13,5 @@ import "prismjs/themes/prism-tomorrow.css";
 
 export default function BlogContent({ content }) {
     useEffect(() => Prism.highlightAll(), []);
-    return <div className="no-tw-base">{parse(content)}</div>;
+    return <div className="no-tw-base mt-9">{parse(content)}</div>;
 }

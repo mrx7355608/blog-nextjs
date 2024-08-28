@@ -7,9 +7,9 @@ import Link from "next/link";
 export default function BlogsTable({ blogs }) {
     return (
         <div className="overflow-x-auto mb-4">
-            <table className="table">
+            <table className="table text-white">
                 <tbody>
-                    <tr>
+                    <tr className="border-white">
                         <th>Title</th>
                         <th>Created on</th>
                         <th>Status</th>
@@ -19,7 +19,7 @@ export default function BlogsTable({ blogs }) {
                 {blogs.map((blog) => {
                     return (
                         <tbody key={blog._id}>
-                            <tr>
+                            <tr className="border-white">
                                 <td>{blog.title}</td>
                                 <td>
                                     {new Date(blog.createdAt)
@@ -31,22 +31,21 @@ export default function BlogsTable({ blogs }) {
                                 </td>
                                 <td className="flex items-center gap-2">
                                     <Link href={`/view-blog/${blog.slug}`}>
-                                        <button className="btn btn-info btn-sm">
+                                        <button className="btn btn-neutral btn-sm">
                                             View
                                         </button>
                                     </Link>
                                     <Link href={`/edit/${blog._id}`}>
-                                        <button className="btn btn-warning btn-sm">
+                                        <button className="btn btn-neutral btn-sm">
                                             Edit
                                         </button>
                                     </Link>
-                                    <DeleteBlogButton blogId={blog._id} />
-
                                     {blog.is_published ? (
                                         <UnPublishButton blogId={blog._id} />
                                     ) : (
                                         <PublishButton blogId={blog._id} />
                                     )}
+                                    <DeleteBlogButton blogId={blog._id} />
                                 </td>
                             </tr>
                         </tbody>

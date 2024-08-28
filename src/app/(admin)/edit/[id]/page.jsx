@@ -48,7 +48,7 @@ export default function EditBlog() {
     };
 
     return (
-        <div className="bg-white rounded-lg p-5">
+        <div className="rounded-lg p-5 text-white">
             <h1 className="text-3xl font-bold text-center mt-5 mb-8">
                 Edit Blog
             </h1>
@@ -90,7 +90,7 @@ export default function EditBlog() {
                 )}
                 {/* Button */}
                 <button
-                    className="btn btn-neutral text-white rounded-full mt-9"
+                    className="btn btn-success text-white rounded-full mt-9"
                     type="submit"
                     disabled={editing}
                     onClick={edit}

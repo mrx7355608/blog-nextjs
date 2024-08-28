@@ -8,12 +8,12 @@ export default async function Dashboard({ searchParams }) {
     const blogs = await getBlogsForAdmin(q);
 
     return (
-        <div className="bg-white text-gray-800 p-5 px-7 rounded-lg w-full">
+        <div className="text-gray-800 p-5 px-7 rounded-lg w-full">
             <div className="flex justify-between items-center w-full mb-8">
-                <h1 className="text-2xl font-bold">Blogs</h1>
+                <h1 className="text-2xl font-bold text-white">Blogs</h1>
                 <div className="flex gap-3 items-center">
                     <Link href="/dashboard/add-blog">
-                        <button className="btn btn-neutral rounded-full text-white px-5 btn-sm inline">
+                        <button className="btn btn-info rounded-full px-5 btn-sm inline">
                             Add blog
                         </button>
                     </Link>

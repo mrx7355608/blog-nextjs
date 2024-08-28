@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import TinyMceEditor from "./TinyMceEditor";
 import Spinner from "../Spinner";
+import TitleInput from "./TitleInput";
+import SummaryInput from "./SummaryInput";
 
 export default function AddBlogForm() {
     const [tags, setTags] = useState([]);
@@ -53,35 +55,23 @@ export default function AddBlogForm() {
     }
 
     return (
-        <div className="w-3/4 mx-auto flex flex-col gap-4">
+        <div className="w-3/4 mx-auto flex flex-col gap-4 text-white bg-transparent">
             {/* Title */}
-            <input
-                type="text"
-                name="title"
-                className="input bg-gray-100 text-xl"
-                placeholder="Title"
-                onChange={onChangeHandler}
-            />
+            <TitleInput onChangeHandler={onChangeHandler} />
 
             {/* Summary */}
-            <textarea
-                name="summary"
-                rows={4}
-                className="textarea resize-none bg-gray-100 text-md"
-                placeholder="Summary"
-                onChange={onChangeHandler}
-            ></textarea>
+            <SummaryInput onChangeHandler={onChangeHandler} />
 
             {/* Content */}
             <TinyMceEditor ref={editorRef} />
 
             {/* Tags */}
             <div className="w-full">
-                <div className="flex flex-wrap gap-4 mb-6 mt-5">
+                <div className="flex flex-wrap gap-4 mb-6 mt-5 text-white">
                     {tags.map((item, index) => {
                         return (
                             <div
-                                className="px-4 py-2 rounded-lg bg-gray-100"
+                                className="px-4 py-2 rounded-lg bg-gray-700"
                                 key={index}
                             >
                                 <span>{item}</span>
@@ -96,12 +86,12 @@ export default function AddBlogForm() {
                     })}
                     <div className="flex gap-3 w-full">
                         <input
-                            className="input w-full bg-gray-100"
+                            className="input w-full bg-gray-700"
                             placeholder="Tag"
                             onChange={(e) => setInputTag(e.target.value)}
                             value={inputTag}
                         />
-                        <span className="btn" onClick={addTag}>
+                        <span className="btn btn-neutral" onClick={addTag}>
                             Add tag
                         </span>
                     </div>
@@ -143,7 +133,7 @@ export default function AddBlogForm() {
             )}
             {/* Button */}
             <button
-                className="btn btn-neutral text-white rounded-full mt-9"
+                className="btn btn-warning rounded-full mt-9"
                 type="submit"
                 disabled={isLoading}
                 onClick={createBlog}

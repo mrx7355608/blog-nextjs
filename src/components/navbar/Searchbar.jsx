@@ -24,15 +24,15 @@ export default function Searchbar() {
         <form className="relative">
             <input
                 type="text"
-                className="input h-10 bg-gray-700 text-sm text-gray-200 font-medium rounded-full w-64 px-4 pr-8"
+                className="input bg-gray-700 text-gray-200 font-medium w-full px-4 pr-8"
                 placeholder="Search"
                 onChange={handleSearch}
             />
             <button
                 type="button"
-                className="btn rounded-full btn-sm bg-gray-300 absolute top-1 right-1 text-gray-500"
+                className="btn rounded-full btn-sm bg-transparent border-none absolute top-2 right-1 text-gray-500"
             >
-                <FaSearch size={12} color="#2d2d2d" />
+                <FaSearch size={15} color="whitesmoke" />
             </button>
         </form>
     );

@@ -4,7 +4,7 @@ export default function TitleInput({ onChangeHandler, title }) {
             type="text"
             name="title"
             value={title}
-            className="input bg-gray-100 text-xl"
+            className="input bg-gray-700 text-xl"
             placeholder="Title"
             onChange={onChangeHandler}
         />

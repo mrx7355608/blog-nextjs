@@ -15,7 +15,7 @@ export default function UnPublishButton({ blogId }) {
 function SubmitButton() {
     const { pending } = useFormStatus();
     return (
-        <button className="btn btn-primary btn-sm">
+        <button className="btn btn-neutral btn-sm">
             {pending ? <Spinner /> : "Un-publish"}
         </button>
     );
