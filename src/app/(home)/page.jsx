@@ -7,7 +7,7 @@ export default async function page({ searchParams }) {
     const blogs = await getBlogs(q);
 
     return (
-        <div>
+        <div className="w-full max-w-4xl">
             <Searchbar />
             <BlogsList blogs={blogs} />
         </div>
