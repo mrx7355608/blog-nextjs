@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/db";
 import { BlogModel } from "@/lib/models";
 import blogValidationSchema from "@/lib/validators";
 import slugify from "slugify";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 function sendResponse(message, statusCode) {
